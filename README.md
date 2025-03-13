@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Instalação do Next.js
 
-## Getting Started
+Este guia descreve os passos para instalar e configurar um projeto Next.js com TypeScript.
 
-First, run the development server:
+## Requisitos
+- **Node.js** versão 12 ou superior
+- **NPM** ou **Yarn** instalado
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Passos para criar um projeto Next.js
+
+### 1. Verificar se o `npx` está instalado
+O `npx` já vem junto com o Node.js. Para verificar:
+```sh
+npx -v
+```
+Se o comando retornar uma versão, o `npx` está instalado corretamente.
+
+### 2. Instalar o Yarn (Opcional, mas recomendado)
+O Yarn pode ser utilizado no lugar do NPM para uma instalação mais rápida:
+```sh
+npm install -g yarn
+```
+Para verificar se o Yarn foi instalado corretamente:
+```sh
+yarn -v
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Criar um novo projeto Next.js
+Com o NPM:
+```sh
+npx create-next-app@latest nome-do-projeto --typescript
+```
+Ou com o Yarn:
+```sh
+yarn create next-app nome-do-projeto --typescript
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Durante a criação, será solicitado o nome do projeto. Após confirmar, o Next.js será instalado junto com as dependências necessárias.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Acessar a pasta do projeto
+```sh
+cd nome-do-projeto
+```
 
-## Learn More
+### 5. Iniciar o servidor de desenvolvimento
+Com NPM:
+```sh
+npm run dev
+```
+Ou com Yarn:
+```sh
+yarn dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+O servidor será iniciado e estará acessível em: [http://localhost:3000](http://localhost:3000)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Se a tela inicial do Next.js aparecer, significa que a instalação foi bem-sucedida!
