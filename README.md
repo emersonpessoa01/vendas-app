@@ -55,3 +55,57 @@ yarn dev
 O servidor será iniciado e estará acessível em: [http://localhost:3000](http://localhost:3000)
 
 Se a tela inicial do Next.js aparecer, significa que a instalação foi bem-sucedida!
+
+## Instalação do Bulma
+Para adicionar o framework Bulma ao seu projeto Next.js, utilize um dos comandos abaixo:
+
+Com NPM:
+```sh
+npm install bulma
+```
+
+Com Yarn:
+```sh
+yarn add bulma
+```
+
+Depois, importe o CSS do Bulma no seu projeto, editando o arquivo `app/page.tsx`:
+
+```tsx
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { Header } from "./components/header";
+import "bulma/css/bulma.min.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Vendas App",
+  description: "Aplicação de vendas",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="pt-BR">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {children}
+      </body>
+    </html>
+  );
+}
+
+```
+
