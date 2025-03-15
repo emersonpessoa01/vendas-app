@@ -109,3 +109,54 @@ export default function RootLayout({
 
 ```
 
+# FontAwesome com React
+
+Este guia explica como instalar e utilizar a biblioteca FontAwesome em um projeto React.
+
+## Instalando as dependências
+
+Para instalar o FontAwesome com `yarn`, execute o seguinte comando:
+
+```bash
+yarn add @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/free-brands-svg-icons @fortawesome/react-fontawesome
+```
+
+## Utilizando o FontAwesome
+
+Você pode usar o FontAwesome de duas formas:
+1. Importando cada ícone individualmente nos seus componentes.
+2. Instanciando toda a biblioteca no arquivo `_app.js` (caso utilize Next.js) ou no ponto de entrada do seu app.
+
+### Importando cada ícone por componente
+
+Caso queira importar apenas os ícones que precisar em cada componente, siga este exemplo:
+
+```javascript
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+export default function MyComponent() {
+  return <FontAwesomeIcon icon={faCoffee} />;
+}
+```
+
+### Instanciando a biblioteca inteira (Opcional)
+
+Se quiser evitar importar ícones individualmente, pode adicionar toda a biblioteca ao contexto global do seu projeto.
+
+Exemplo para Next.js (arquivo `_app.js` ou `_app.tsx`):
+
+```javascript
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+config.autoAddCss = false;
+```
+
+Agora, os ícones podem ser usados diretamente sem necessidade de importação individual.
+
+## Conclusão
+
+Agora você pode utilizar o FontAwesome no seu projeto React de forma modular ou global, dependendo da sua necessidade. 🚀
+
+
+
