@@ -69,7 +69,7 @@ Com Yarn:
 yarn add bulma
 ```
 
-Depois, importe o CSS do Bulma no seu projeto, editando o arquivo `app/page.tsx`:
+Depois, importe o CSS do Bulma no seu projeto, editando o arquivo `app/layout.tsx`:
 
 ```tsx
 import type { Metadata } from "next";

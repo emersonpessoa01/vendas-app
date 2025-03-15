@@ -11,7 +11,6 @@ export default function MensagemPage() {
   return (
     <div>
       <Mensagem mensagem={10} />
-      <button className="button">Button</button>
     </div>
   );
 }
