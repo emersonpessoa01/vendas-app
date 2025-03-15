@@ -1,4 +1,4 @@
-const Layout: React.FC = () => {
+export const Layout: React.FC = () => {
   return (
     <div className="app">
       <section className="main-content columns i-fullheight">
@@ -23,4 +23,3 @@ const Layout: React.FC = () => {
     </div>
   );
 };
-export default Layout;

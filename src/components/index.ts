@@ -1,3 +1,2 @@
-// Quero exportar o layout
-
 export { Layout } from "./layout";
+export { Header } from "./header";
