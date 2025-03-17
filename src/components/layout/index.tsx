@@ -1,11 +1,15 @@
+"use client";
+
 import { Menu } from "./menu";
+
 export const Layout: React.FC = () => {
   return (
     <div className="app">
-      <section className="main-content columns i-fullheight">
-        {/* menu ficará aqui*/}
+      <section className="main-content is-flex is-fullheight">
+        {/* Menu fixo à esquerda */}
         <Menu />
-        <div className="container column is-10">
+        {/* Conteúdo ocupa o espaço restante */}
+        <div className="container column is-flex-grow-1">
           <div className="section">
             <div className="card">
               <div className="card-header">
@@ -18,6 +22,19 @@ export const Layout: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <style jsx>{`
+        .main-content {
+          display: flex;
+          width: 100%;
+        }
+
+        .container {
+          max-width: 800px; /* Evita que o conteúdo fique muito esticado */
+          width: 100%;
+          padding: 20px;
+        }
+      `}</style>
     </div>
   );
 };
