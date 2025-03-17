@@ -1,31 +1,19 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTachometerAlt, faUsers, faCubes } from "@fortawesome/free-solid-svg-icons";
+import { faTachometerAlt, faUsers, faCubes, faSignOutAlt,IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 export const Menu: React.FC = () => {
   return (
     <aside className="menu column is-2 is-narrow-mobile is-fullheight section is-hidden-mobile bg-gray-200">
       <p className="menu-label is-hidden-touch p-4">Minhas Vendas</p>
       <ul className="menu-list">
-        <li className="menu-item">
-          <a href="#" className="menu-link" aria-current="page">
-            <FontAwesomeIcon icon={faTachometerAlt} className="icon" />
-            <span className="menu-text">Home</span>
-          </a>
-        </li>
-        <li className="menu-item">
-          <a href="#" className="menu-link">
-            <FontAwesomeIcon icon={faUsers} className="icon" />
-            <span className="menu-text">Cadastros</span>
-          </a>
-        </li>
-        <li className="menu-item">
-          <a href="#" className="menu-link">
-            <FontAwesomeIcon icon={faCubes} className="icon" />
-            <span className="menu-text">Configurações</span>
-          </a>
-        </li>
+        <MenuItem href="#" label="Home" icon={faTachometerAlt} />
+        <MenuItem href="#" label="Cadastros" icon={faUsers} />
+        <MenuItem href="#" label="Configurações" icon={faCubes} />
+        <MenuItem href="#" label="Sair" icon={faSignOutAlt} />
+
       </ul>
 
       <style jsx>{`
@@ -78,5 +66,22 @@ export const Menu: React.FC = () => {
         }
       `}</style>
     </aside>
+  );
+};
+
+interface MenuItemProps {
+  href: string;
+  label: string;
+  icon: IconDefinition;
+}
+
+const MenuItem: React.FC<MenuItemProps> = ({ href, label, icon }) => {
+  return (
+    <li className="menu-item">
+      <Link href={href} className="menu-link">
+        <FontAwesomeIcon icon={icon} className="icon" />
+        <span className="menu-text">{label}</span>
+      </Link>
+    </li>
   );
 };
