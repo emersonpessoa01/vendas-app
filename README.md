@@ -1,3 +1,28 @@
+# 🛠️ Desenvolva Aplicações Completas com Spring Boot e React.js  
+
+Este repositório contém materiais e projetos do curso **[Desenvolva Aplicações Completas com Spring Boot e React.js](https://www.udemy.com/course/desenvolva-aplicacoes-completas-com-spring-boot-e-react-js/)** da Udemy.  
+
+## 📌 Sobre o curso  
+O curso ensina o desenvolvimento full stack integrando **Spring Boot** no backend e **React.js** no frontend. Além disso, aborda conceitos essenciais como:  
+
+- 🔹 Criação e consumo de **APIs REST**  
+- 🔹 **Segurança** com JWT  
+- 🔹 Persistência com **JPA/Hibernate**  
+- 🔹 Integração com bancos de dados **PostgreSQL/MySQL**  
+- 🔹 Deploy na **nuvem (Heroku, Vercel, etc.)**  
+
+## 🚀 Tecnologias Utilizadas  
+- **Backend:** Java, Spring Boot, Spring Security, JPA/Hibernate  
+- **Frontend:** React.js, React Hooks, Context API  
+- **Banco de Dados:** PostgreSQL, MySQL  
+- **Ferramentas:** Postman, Docker, Maven  
+
+
+📌 **Mais detalhes:** [Curso na Udemy](https://www.udemy.com/course/desenvolva-aplicacoes-completas-com-spring-boot-e-react-js/)
+
+---
+
+
 # Instalação do Next.js
 
 Este guia descreve os passos para instalar e configurar um projeto Next.js com TypeScript.
