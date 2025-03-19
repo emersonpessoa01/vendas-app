@@ -1,8 +1,10 @@
 "use client";
 
 import { Menu } from "./menu";
-
-export const Layout: React.FC = () => {
+interface LayoutProps{
+  titulo?: string;
+}
+export const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
   return (
     <div className="app">
       <section className="main-content is-flex is-fullheight">
@@ -13,7 +15,7 @@ export const Layout: React.FC = () => {
           <div className="section">
             <div className="card">
               <div className="card-header">
-                <p className="card-header-title">Cadastro</p>
+                <p className="card-header-title w-full">{props.titulo}</p>
               </div>
               <div className="card-content">
                 <div className="content">Conteúdo</div>
