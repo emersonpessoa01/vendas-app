@@ -1,10 +1,14 @@
 "use client";
 
 import { Menu } from "./menu";
+
 interface LayoutProps{
-  titulo?: string;
+  titulo: string;
+  children: React.ReactNode;
 }
-export const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
+
+export const Layout: React.FC<LayoutProps> = ({titulo,children}) => {
+  console.log(`Título recebido: ${titulo}`); 
   return (
     <div className="app">
       <section className="main-content is-flex is-fullheight">
@@ -15,10 +19,10 @@ export const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
           <div className="section">
             <div className="card">
               <div className="card-header">
-                <p className="card-header-title w-full">{props.titulo}</p>
+                <p className="card-header-title w-full">{titulo}</p>
               </div>
               <div className="card-content">
-                <div className="content">Conteúdo</div>
+                <div className="content">{children}</div>
               </div>
             </div>
           </div>
@@ -40,5 +44,6 @@ export const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
     </div>
   );
 };
+
 
 
