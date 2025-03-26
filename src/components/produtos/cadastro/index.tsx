@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { Layout } from "components";
+import { Layout, Input } from "components";
 export const CadastroProdutos: React.FC = () => {
-  const [sku, setSku] = useState("");
-  const [preco, setPreco] = useState("");
-  const [nome, setNome] = useState("");
-  const [descricao, setDescricao] = useState("");
+  const [sku, setSku] = useState<string>("");
+  const [preco, setPreco] = useState<string>("");
+  const [nome, setNome] = useState<string>("");
+  const [descricao, setDescricao] = useState<string>("");
 
   const submit = () => {
     const produto = {
@@ -20,6 +20,7 @@ export const CadastroProdutos: React.FC = () => {
   return (
     <Layout titulo="Cadastro de produtos">
       <div className="columns">
+        <Input label=" SKU:*" columnClasses="is-full" onChange={setSku} value={sku} />
         <div className="field column is-half">
           <label htmlFor="inputSku" className="label">
             SKU:*
@@ -44,7 +45,10 @@ export const CadastroProdutos: React.FC = () => {
             <input
               id="inputPreco"
               className="input"
-              type="text"
+              type="number"
+              step="0.1"
+              min={0}
+              max={10000}
               placeholder="Digite o preço do produto"
               value={preco}
               onChange={(event) => setPreco(event.target.value)}
