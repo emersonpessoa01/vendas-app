@@ -1,7 +1,8 @@
 "use client";
 
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTachometerAlt, faUsers, faCubes, faSignOutAlt,IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faTachometerAlt, faUsers, faCubes, faSignOutAlt, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
 export const Menu: React.FC = () => {
@@ -13,7 +14,6 @@ export const Menu: React.FC = () => {
         <MenuItem href="/" label="Cadastros" icon={faUsers} />
         <MenuItem href="/" label="Configurações" icon={faCubes} />
         <MenuItem href="/" label="Sair" icon={faSignOutAlt} />
-
       </ul>
 
       <style jsx>{`
@@ -35,11 +35,8 @@ export const Menu: React.FC = () => {
           list-style: none;
           width: 100%;
           border-radius: 5px;
-          transition: background 0.3s;
-        }
 
-        .menu-item:hover {
-          background: #f5f5f5;
+          background: transparent !important;
         }
 
         .menu-link {
@@ -47,7 +44,7 @@ export const Menu: React.FC = () => {
           align-items: center;
           justify-content: flex-start;
           width: 100%;
-          padding: 8px;
+          /* padding: 8px; */
           text-decoration: none;
           color: #333;
           white-space: nowrap;
@@ -64,6 +61,8 @@ export const Menu: React.FC = () => {
           flex-grow: 1;
           margin-left: 8px;
         }
+        
+        
       `}</style>
     </aside>
   );
@@ -74,13 +73,17 @@ interface MenuItemProps {
   label: string;
   icon: IconDefinition;
 }
-
 const MenuItem: React.FC<MenuItemProps> = ({ href, label, icon }) => {
   return (
-    <li className="menu-item">
-      <Link href={href} className="menu-link">
-        <FontAwesomeIcon icon={icon} className="icon" />
-        <span className="menu-text">{label}</span>
+    <li className="list-none w-full">
+      <Link
+        href={href}
+        className="button is-fullwidth has-text-black has-background-grey-lighter is-flex is-align-items-center is-justify-content-start"
+      >
+        <span className="icon mr-3">
+          <FontAwesomeIcon icon={icon} />
+        </span>
+        <span>{label}</span>
       </Link>
     </li>
   );
