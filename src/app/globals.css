@@ -28,6 +28,8 @@ body {
 .card{
   background: #f5f7f9 !important;
   color: #171717 !important;
+  /* sombra no formulário */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
 }
 /* Estilo do campo de entrada */
 .field.column.is-half{
@@ -43,12 +45,12 @@ body {
 }
 /* Estilo do Input */
 #inputSku,#inputPreco,#inputNome,#inputDesc{
-  background: #f5f7f9 !important;
+  background: #fff !important;
   color: #171717 !important;
   border: .1px solid rgba(0,0,0,0.2) !important;
   
 }
 /* placeholder */
 :is(#inputSku,#inputPreco,#inputNome,#inputDesc)::placeholder {
-  color: #171717 !important;
+  color: #17171759 !important;
 }
