@@ -57,5 +57,5 @@ export const CadastroProdutos: React.FC = () => {
         </div>
       </div>
     </Layout>
-  );
+  )
 };
