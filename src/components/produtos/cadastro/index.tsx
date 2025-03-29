@@ -43,13 +43,13 @@ export const CadastroProdutos: React.FC = () => {
             />
           </div>
           <div className="field is-grouped py-5">
-            <div className="control">
-              <button type="button" className="button is-link" onClick={submit}>
+            <div className="control is-expanded">
+              <button type="button" className="button is-link is-fullwidth is-hovered is-focused" onClick={submit}>
                 Salvar
               </button>
             </div>
-            <div className="control">
-              <button type="button" className="button is-link is-light">
+            <div className="control is-expanded">
+              <button type="button" className="button is-link is-light is-fullwidth is-hovered is-focused">
                 Voltar
               </button>
             </div>

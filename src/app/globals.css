@@ -14,6 +14,12 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+/* Estilo do Container Cadastro de produtos */
+@media screen and (min-width: 1408px) {
+  .container:not(.is-max-tablet):not(.is-max-desktop):not(.is-max-widescreen) {
+      max-width: 800px !important;
+  }
+}
 /* Estilo para o botão */
 .button.is-fullwidth {
   padding: 10px 20px;
