@@ -2,6 +2,7 @@
 
 Este repositório contém materiais e projetos do curso **[Desenvolva Aplicações Completas com Spring Boot e React.js](https://www.udemy.com/course/desenvolva-aplicacoes-completas-com-spring-boot-e-react-js/)** da Udemy.  
 
+<->
 ## 📌 Sobre o curso  
 O curso ensina o desenvolvimento full stack integrando **Spring Boot** no backend e **React.js** no frontend. Além disso, aborda conceitos essenciais como:  
 
@@ -178,6 +179,18 @@ config.autoAddCss = false;
 ```
 
 Agora, os ícones podem ser usados diretamente sem necessidade de importação individual.
+
+## 🧩 Instalação do Axios
+
+Para consumir APIs no frontend, utilizaremos a biblioteca **Axios**.
+
+### Instalar o Axios
+
+Com **NPM**:
+
+```bash
+npm install axios
+```
 
 ## Conclusão
 

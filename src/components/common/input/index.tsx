@@ -3,8 +3,9 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChan
   onChange?: (value: string) => void;
   label: string;
   columnClasses?: string;
-  id: string;
+  /* id: string;*/
 }
+
 export const Input: React.FC<InputProps> = ({ onChange, label, columnClasses, id, ...inputProps }) => {
   return (
     <div className={`field column ${columnClasses}`}>
