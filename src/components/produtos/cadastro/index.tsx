@@ -1,20 +1,28 @@
 "use client";
 import React, { useState } from "react";
 import { Layout, Input } from "components";
+import { useProdutoService } from "../../../config/services";
+import { Produto } from "config/models/produtos";
 export const CadastroProdutos: React.FC = () => {
+  const service = useProdutoService();
   const [sku, setSku] = useState<string>("");
   const [preco, setPreco] = useState<string>("");
   const [nome, setNome] = useState<string>("");
   const [descricao, setDescricao] = useState<string>("");
 
   const submit = () => {
-    const produto = {
+    const produto: Produto = {
       sku,
-      preco,
+      preco: parseFloat(preco),
       nome,
       descricao,
     };
-    console.log(produto);
+    // console.log(produto);
+    service
+    .salvar(produto)
+    .then((produtoResposta) => {
+      console.log(produtoResposta);
+    });
   };
 
   return (
@@ -26,8 +34,7 @@ export const CadastroProdutos: React.FC = () => {
       <div className="columns">
         <Input label="Nome:*" columnClasses="is-full" onChange={setNome} value={nome} id="inputNome" placeholder="Digite o nome do produto" />
       </div>
-      
-      
+
       <div className="columns">
         <div className="field column is-full">
           <label htmlFor="inputDesc" className="label">
@@ -57,5 +64,5 @@ export const CadastroProdutos: React.FC = () => {
         </div>
       </div>
     </Layout>
-  )
+  );
 };
