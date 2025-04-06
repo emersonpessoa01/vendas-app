@@ -11,7 +11,7 @@ export const Menu: React.FC = () => {
       <p className="menu-label is-hidden-touch p-4">Minhas Vendas</p>
       <ul className="menu-list">
         <MenuItem href="/" label="Home" icon={faTachometerAlt} />
-        <MenuItem href="/" label="Cadastros" icon={faUsers} />
+        <MenuItem href="/pages/cadastro/produtos" label="Produtos" icon={faUsers} />
         <MenuItem href="/" label="Configurações" icon={faCubes} />
         <MenuItem href="/" label="Sair" icon={faSignOutAlt} />
       </ul>

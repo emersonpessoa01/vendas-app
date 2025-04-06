@@ -66,6 +66,11 @@ body {
   border: .1px solid rgba(0,0,0,0.2) !important;
   
 }
+#inputId,#inputCadastro{
+  background: #d6d9e0 !important;
+  border: none !important;
+  color: #171717 !important;
+}
 /* placeholder */
 :is(#inputSku,#inputPreco,#inputNome,#inputDesc)::placeholder {
   color: #17171759 !important;
