@@ -8,7 +8,7 @@ interface LayoutProps{
 }
 
 export const Layout: React.FC<LayoutProps> = ({titulo,children}) => {
-  console.log(`Título recebido: ${titulo}`)
+  // console.log(`Título recebido: ${titulo}`)
   return (
     <div className="app">
       <section className="main-content is-flex is-fullheight">

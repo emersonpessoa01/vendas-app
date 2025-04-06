@@ -9,9 +9,8 @@ export const CadastroProdutos: React.FC = () => {
   const [preco, setPreco] = useState<string>("");
   const [nome, setNome] = useState<string>("");
   const [descricao, setDescricao] = useState<string>("");
-  const [id, setId] = useState<number>();
+  const [id, setId] = useState<string>("");
   const [dataCadastro, setDataCadastro] = useState<string>("");
-  
 
   const submit = () => {
     const produto: Produto = {
@@ -21,20 +20,21 @@ export const CadastroProdutos: React.FC = () => {
       descricao,
     };
     // console.log(produto);
-    service
-    .salvar(produto)
-    .then((produtoResposta) => {
-      setId(produtoResposta.id);
+    service.salvar(produto).then((produtoResposta) => {
+      setId(produtoResposta.id?.toString() || "");
       setDataCadastro(produtoResposta.dataCadastro || "");
     });
   };
 
   return (
     <Layout titulo="Cadastro de produtos">
-      <div className="columns">
-        <Input label="Código:" columnClasses="is-half" value={id?.toString() || ""} disabled id="inputId" />
-        <Input label="Data de cadastro:" columnClasses="is-half" value={dataCadastro} id="inputCadastro" disabled />
-      </div>
+      {/* Renderização condicional */}
+      {id && (
+        <div className="columns">
+          <Input label="Código:" columnClasses="is-half" value={id?.toString() || ""} disabled id="inputId" />
+          <Input label="Data de cadastro:" columnClasses="is-half" value={dataCadastro} id="inputCadastro" disabled />
+        </div>
+      )}
       <div className="columns">
         <Input label=" SKU:*" columnClasses="is-half" onChange={setSku} value={sku} id="inputSku" placeholder="Digite o SKU do produto" />
         <Input label="Preço:*" columnClasses="is-half" onChange={setPreco} value={preco} id="inputPreco" placeholder="Digite o preço do produto" />
