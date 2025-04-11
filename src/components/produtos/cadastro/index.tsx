@@ -60,7 +60,7 @@ export const CadastroProdutos: React.FC = () => {
           <div className="field is-grouped py-5">
             <div className="control is-expanded">
               <button type="button" className="button is-link is-fullwidth is-hovered is-focused" onClick={submit}>
-                Salvar
+                {id ? "Atualizar" : "Salvar"}
               </button>
             </div>
             <div className="control is-expanded">
