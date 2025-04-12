@@ -14,16 +14,26 @@ export const CadastroProdutos: React.FC = () => {
 
   const submit = () => {
     const produto: Produto = {
+      id,
       sku,
       preco: parseFloat(preco),
       nome,
       descricao,
     };
-    // console.log(produto);
-    service.salvar(produto).then((produtoResposta) => {
-      setId(produtoResposta.id?.toString() || "");
-      setDataCadastro(produtoResposta.dataCadastro || "");
-    });
+
+    if (id) {
+      service
+      .atualizar(produto)
+      .then((response) => {
+        console.log(response);
+      });
+    } else {
+      // console.log(produto);
+      service.salvar(produto).then((produtoResposta) => {
+        setId(produtoResposta.id?.toString() || "");
+        setDataCadastro(produtoResposta.dataCadastro || "");
+      });
+    }
   };
 
   return (
