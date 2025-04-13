@@ -22,16 +22,26 @@ export const CadastroProdutos: React.FC = () => {
     };
 
     if (id) {
-      service
-      .atualizar(produto)
-      .then((response) => {
+      service.atualizar(produto).then((response) => {
+        /* Continue */
         console.log(response);
+        setId(produto.id ?? "");
+        setDataCadastro(produto.dataCadastro ?? "");
+        setSku(produto.sku ?? "");
+        setPreco(produto.preco?.toString() ?? "");
+        setNome(produto.nome ?? "");
+        setDescricao(produto.descricao ?? "");
       });
     } else {
       // console.log(produto);
       service.salvar(produto).then((produtoResposta) => {
-        setId(produtoResposta.id?.toString() || "");
-        setDataCadastro(produtoResposta.dataCadastro || "");
+        console.log(produtoResposta);
+        setId(produtoResposta.id ?? "");
+        setDataCadastro(produtoResposta.dataCadastro ?? "");
+        setSku(produtoResposta.sku ?? "");
+        setPreco(produtoResposta.preco?.toString() ?? "");
+        setNome(produtoResposta.nome ?? "");
+        setDescricao(produtoResposta.descricao ?? "");
       });
     }
   };
