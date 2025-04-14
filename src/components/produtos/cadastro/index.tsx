@@ -57,7 +57,15 @@ export const CadastroProdutos: React.FC = () => {
       )}
       <div className="columns">
         <Input label=" SKU:*" columnClasses="is-half" onChange={setSku} value={sku} id="inputSku" placeholder="Digite o SKU do produto" />
-        <Input label="Preço:*" columnClasses="is-half" onChange={setPreco} value={preco} id="inputPreco" placeholder="Digite o preço do produto" />
+        <Input
+          label="Preço:*"
+          columnClasses="is-half"
+          onChange={setPreco}
+          value={preco}
+          id="inputPreco"
+          placeholder="Digite o preço do produto"
+          currency
+        />
       </div>
       <div className="columns">
         <Input label="Nome:*" columnClasses="is-full" onChange={setNome} value={nome} id="inputNome" placeholder="Digite o nome do produto" />
