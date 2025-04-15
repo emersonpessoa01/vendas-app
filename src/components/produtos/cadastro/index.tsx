@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { Layout, Input } from "components";
+import { Layout, Input, Message } from "components";
 import { useProdutoService } from "../../../config/services";
 import { Produto } from "config/models/produtos";
+import {converterEmBigDecimal, formatReal} from "config/util/money";
 export const CadastroProdutos: React.FC = () => {
   const service = useProdutoService();
   const [sku, setSku] = useState<string>("");
@@ -13,25 +14,31 @@ export const CadastroProdutos: React.FC = () => {
   const [dataCadastro, setDataCadastro] = useState<string>("");
 
   const submit = () => {
+    if(!sku || !preco || !nome || !descricao) {
+      alert("Preencha todos os campos obrigatórios!");
+      return;
+    }
     const produto: Produto = {
       id,
       sku,
-      preco: parseFloat(preco),
+      preco: converterEmBigDecimal(preco),
       nome,
       descricao,
+      dataCadastro: dataCadastro || new Date().toLocaleDateString("pt-BR") // ou outra formatação
     };
+    
 
     if (id) {
       service.atualizar(produto).then((response) => {
-        /* Continue */
         console.log(response);
         setId(produto.id ?? "");
         setDataCadastro(produto.dataCadastro ?? "");
         setSku(produto.sku ?? "");
-        setPreco(produto.preco?.toString() ?? "");
+        setPreco(formatReal(produto.preco?.toString() ?? ""));
         setNome(produto.nome ?? "");
         setDescricao(produto.descricao ?? "");
       });
+      
     } else {
       // console.log(produto);
       service.salvar(produto).then((produtoResposta) => {
@@ -39,15 +46,19 @@ export const CadastroProdutos: React.FC = () => {
         setId(produtoResposta.id ?? "");
         setDataCadastro(produtoResposta.dataCadastro ?? "");
         setSku(produtoResposta.sku ?? "");
-        setPreco(produtoResposta.preco?.toString() ?? "");
+        setPreco(formatReal(produtoResposta.preco?.toString() ?? ""));
         setNome(produtoResposta.nome ?? "");
         setDescricao(produtoResposta.descricao ?? "");
       });
+      
     }
   };
 
   return (
     <Layout titulo="Cadastro de produtos">
+      <Message tipo="warning" texto="Os campos com * são obrigatórios." />
+      <Message tipo="danger" texto="Os campos com ** são obrigatórios." />
+      <Message tipo="success" texto="Produto cadastrado com sucesso." />
       {/* Renderização condicional */}
       {id && (
         <div className="columns">
@@ -65,6 +76,7 @@ export const CadastroProdutos: React.FC = () => {
           id="inputPreco"
           placeholder="Digite o preço do produto"
           currency
+          maxLength={16}
         />
       </div>
       <div className="columns">

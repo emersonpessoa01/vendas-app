@@ -1,30 +1,29 @@
 export const converterEmBigDecimal = (value: string): number => {
-  if (!value) {
-    return 0;
-  }
-  return parseFloat(value.replace(".", "").replace(",", "."));
+  if (!value) return 0;
+
+  // Remove os pontos de milhar e troca a vírgula por ponto decimal
+  const cleaned = value.replace(/\./g, "").replace(",", ".");
+
+  const result = parseFloat(cleaned);
+  return isNaN(result) ? 0 : result;
 };
 
-interface FormatRealInput {
-  valor: string;
-}
 
-export const formatReal = (valor: FormatRealInput["valor"]): string => {
-  const v = ((parseFloat(valor.replace(/\D/g, "")) / 100).toFixed(2) + "").split(".");
+export const formatReal = (valor: string): string => {
+  if (!valor) return "0,00";
 
-  const m = v[0]
-    .split("")
-    .reverse()
-    .join("")
-    .match(/.{1,3}/g);
+  // Remove tudo que não for dígito
+  const cleaned = valor.replace(/\D/g, "");
 
-  if (!m) {
-    return "0,00";
-  }
+  // Converte para número (em centavos), divide por 100 e formata
+  const number = (parseInt(cleaned, 10) / 100).toFixed(2);
 
-  for (let i = 0; i < m.length; i++) m[i] = m[i].split("").reverse().join("") + ".";
+  const parts = number.split(".");
+  let integerPart = parts[0];
+  const decimalPart = parts[1];
 
-  const r = m.reverse().join("");
+  // Adiciona pontos como separadores de milhar
+  integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-  return r.substring(0, r.lastIndexOf(".")) + "," + v[1];
+  return `${integerPart},${decimalPart}`;
 };
