@@ -12,7 +12,7 @@ export const Input: React.FC<InputProps> = ({ onChange, label, columnClasses, id
   const onInputchange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = event.target.value;
     if (value && currency) {
-      value = formatReal(Number(value));
+      value = formatReal(value);
     }
     if (onChange) {
       onChange(value);
