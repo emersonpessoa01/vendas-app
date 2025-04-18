@@ -4,7 +4,7 @@ import { Layout, Input } from "components";
 import { useProdutoService } from "../../../config/services";
 import { Produto } from "config/models/produtos";
 import {converterEmBigDecimal, formatReal} from "config/util/money";
-import { Message, Alert } from "components/common/message";
+import { Alert } from "components/common/message";
 export const CadastroProdutos: React.FC = () => {
   const service = useProdutoService();
   const [sku, setSku] = useState<string>("");
