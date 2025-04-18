@@ -1,2 +1,2 @@
 export { Input } from "./input";
-export { Message } from "./message";
+export type { Message, Alert } from "./message";

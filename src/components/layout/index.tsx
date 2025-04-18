@@ -1,13 +1,16 @@
 "use client";
 
+import { ReactNode } from "react";
 import { Menu } from "./menu";
+import { Message, Alert } from "components/common/message";
 
-interface LayoutProps{
-  titulo: string;
-  children: React.ReactNode;
+interface LayoutProps {
+  titulo?: string;
+  children?: ReactNode;
+  mensagens?: Array<Alert>;
 }
 
-export const Layout: React.FC<LayoutProps> = ({titulo,children}) => {
+export const Layout: React.FC<LayoutProps> = ({ titulo, children, mensagens }) => {
   // console.log(`Título recebido: ${titulo}`)
   return (
     <div className="app">
@@ -22,7 +25,10 @@ export const Layout: React.FC<LayoutProps> = ({titulo,children}) => {
                 <p className="card-header-title w-full">{titulo}</p>
               </div>
               <div className="card-content">
-                <div className="content">{children}</div>
+                <div className="content">
+                  {mensagens && mensagens.map((msg) => <Message {...msg} />)}
+                  {children}
+                </div>
               </div>
             </div>
           </div>
@@ -44,6 +50,3 @@ export const Layout: React.FC<LayoutProps> = ({titulo,children}) => {
     </div>
   );
 };
-
-
-

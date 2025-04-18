@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { Layout, Input, Message } from "components";
+import { Layout, Input } from "components";
 import { useProdutoService } from "../../../config/services";
 import { Produto } from "config/models/produtos";
 import {converterEmBigDecimal, formatReal} from "config/util/money";
+import { Message, Alert } from "components/common/message";
 export const CadastroProdutos: React.FC = () => {
   const service = useProdutoService();
   const [sku, setSku] = useState<string>("");
@@ -12,6 +13,8 @@ export const CadastroProdutos: React.FC = () => {
   const [descricao, setDescricao] = useState<string>("");
   const [id, setId] = useState<string>("");
   const [dataCadastro, setDataCadastro] = useState<string>("");
+  const [messages, setMessages] = useState<Array<Alert>>([]);
+  
 
   const submit = () => {
     if(!sku || !preco || !nome || !descricao) {
@@ -37,6 +40,23 @@ export const CadastroProdutos: React.FC = () => {
         setPreco(formatReal(produto.preco?.toString() ?? ""));
         setNome(produto.nome ?? "");
         setDescricao(produto.descricao ?? "");
+        
+        setMessages([
+          {
+            tipo: "success",
+            field: "Produto",
+            texto: `${produto.nome} atualizado com sucesso!`,
+          },
+        ]);
+      }).catch((error) => {
+        console.error(error);
+        setMessages([
+          {
+            tipo: "danger",
+            field: "Produto",
+            texto: `Erro ao atualizar o produto ${produto.nome}: ${error.message}`,
+          },
+        ]);
       });
       
     } else {
@@ -49,17 +69,31 @@ export const CadastroProdutos: React.FC = () => {
         setPreco(formatReal(produtoResposta.preco?.toString() ?? ""));
         setNome(produtoResposta.nome ?? "");
         setDescricao(produtoResposta.descricao ?? "");
+
+        setMessages([
+          {
+            tipo: "success",
+            field: "Produto",
+            texto: `${produto.nome} cadastrado com sucesso!`,
+          },
+        ]);
+      }).catch((error) => {
+        console.error(error);
+        setMessages([
+          {
+            tipo: "danger",
+            field: "Produto",
+            texto: `Erro ao cadastrar o ${produto.nome}: ${error.message}`,
+          },
+        ]);
       });
       
     }
   };
 
   return (
-    <Layout titulo="Cadastro de produtos">
-      <Message tipo="warning" texto="Os campos com * são obrigatórios." />
-      <Message tipo="danger" texto="Os campos com ** são obrigatórios." />
-      <Message tipo="success" texto="Produto cadastrado com sucesso." />
-      {/* Renderização condicional */}
+    <Layout titulo="Cadastro de produtos" mensagens={messages}>
+
       {id && (
         <div className="columns">
           <Input label="Código:" columnClasses="is-half" value={id?.toString() || ""} disabled id="inputId" />
