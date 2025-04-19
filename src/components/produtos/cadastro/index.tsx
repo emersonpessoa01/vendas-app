@@ -3,8 +3,16 @@ import React, { useState } from "react";
 import { Layout, Input } from "components";
 import { useProdutoService } from "../../../config/services";
 import { Produto } from "config/models/produtos";
-import {converterEmBigDecimal, formatReal} from "config/util/money";
+import { converterEmBigDecimal, formatReal } from "config/util/money";
 import { Alert } from "components/common/message";
+import * as yup from "yup";
+
+const validationSchema = yup.object().shape({
+  sku: yup.string().required("SKU é obrigatório"),
+  preco: yup.string().required("Preço é obrigatório"),
+  nome: yup.string().required("Nome é obrigatório"),
+  descricao: yup.string().required("Descrição é obrigatória"),
+});
 export const CadastroProdutos: React.FC = () => {
   const service = useProdutoService();
   const [sku, setSku] = useState<string>("");
@@ -14,86 +22,102 @@ export const CadastroProdutos: React.FC = () => {
   const [id, setId] = useState<string>("");
   const [dataCadastro, setDataCadastro] = useState<string>("");
   const [messages, setMessages] = useState<Array<Alert>>([]);
-  
 
   const submit = () => {
-    if(!sku || !preco || !nome || !descricao) {
-      alert("Preencha todos os campos obrigatórios!");
-      return;
-    }
+    // if (!sku || !preco || !nome || !descricao) {
+    //   alert("Preencha todos os campos obrigatórios!");
+    //   return;
+    // }
     const produto: Produto = {
       id,
       sku,
       preco: converterEmBigDecimal(preco),
       nome,
       descricao,
-      dataCadastro: dataCadastro || new Date().toLocaleDateString("pt-BR") // ou outra formatação
+      dataCadastro: dataCadastro || new Date().toLocaleDateString("pt-BR"), // ou outra formatação
     };
-    
+    validationSchema
+      .validate(produto)
+      .then(() => {
+        if (id) {
+          service
+            .atualizar(produto)
+            .then((response) => {
+              console.log(response);
+              setId(produto.id ?? "");
+              setDataCadastro(produto.dataCadastro ?? "");
+              setSku(produto.sku ?? "");
+              setPreco(formatReal(produto.preco?.toString() ?? ""));
+              setNome(produto.nome ?? "");
+              setDescricao(produto.descricao ?? "");
 
-    if (id) {
-      service.atualizar(produto).then((response) => {
-        console.log(response);
-        setId(produto.id ?? "");
-        setDataCadastro(produto.dataCadastro ?? "");
-        setSku(produto.sku ?? "");
-        setPreco(formatReal(produto.preco?.toString() ?? ""));
-        setNome(produto.nome ?? "");
-        setDescricao(produto.descricao ?? "");
-        
-        setMessages([
-          {
-            tipo: "success",
-            field: "Produto",
-            texto: `${produto.nome} atualizado com sucesso!`,
-          },
-        ]);
-      }).catch((error) => {
-        console.error(error);
+              setMessages([
+                {
+                  tipo: "success",
+                  field: "Produto",
+                  texto: `${produto.nome} atualizado com sucesso!`,
+                },
+              ]);
+            })
+            .catch((error) => {
+              console.error(error);
+              setMessages([
+                {
+                  tipo: "danger",
+                  field: "Produto",
+                  texto: `Erro ao atualizar o produto ${produto.nome}: ${error.message}`,
+                },
+              ]);
+            });
+        } else {
+          // console.log(produto);
+          service
+            .salvar(produto)
+            .then((produtoResposta) => {
+              console.log(produtoResposta);
+              setId(produtoResposta.id ?? "");
+              setDataCadastro(produtoResposta.dataCadastro ?? "");
+              setSku(produtoResposta.sku ?? "");
+              setPreco(formatReal(produtoResposta.preco?.toString() ?? ""));
+              setNome(produtoResposta.nome ?? "");
+              setDescricao(produtoResposta.descricao ?? "");
+
+              setMessages([
+                {
+                  tipo: "success",
+                  field: "Produto",
+                  texto: `${produto.nome} cadastrado com sucesso!`,
+                },
+              ]);
+            })
+            .catch((error) => {
+              console.error(error);
+              setMessages([
+                {
+                  tipo: "danger",
+                  field: "Produto",
+                  texto: `Erro ao cadastrar o ${produto.nome}: ${error.message}`,
+                },
+              ]);
+            });
+        }
+      })
+      .catch((error) => {
+        const field = error.path;
+        const message = error.message;
+        // console.log(JSON.parse(JSON.stringify(error)));
         setMessages([
           {
             tipo: "danger",
-            field: "Produto",
-            texto: `Erro ao atualizar o produto ${produto.nome}: ${error.message}`,
+            field: field,
+            texto: message,
           },
         ]);
       });
-      
-    } else {
-      // console.log(produto);
-      service.salvar(produto).then((produtoResposta) => {
-        console.log(produtoResposta);
-        setId(produtoResposta.id ?? "");
-        setDataCadastro(produtoResposta.dataCadastro ?? "");
-        setSku(produtoResposta.sku ?? "");
-        setPreco(formatReal(produtoResposta.preco?.toString() ?? ""));
-        setNome(produtoResposta.nome ?? "");
-        setDescricao(produtoResposta.descricao ?? "");
-
-        setMessages([
-          {
-            tipo: "success",
-            field: "Produto",
-            texto: `${produto.nome} cadastrado com sucesso!`,
-          },
-        ]);
-      }).catch((error) => {
-        console.error(error);
-        setMessages([
-          {
-            tipo: "danger",
-            field: "Produto",
-            texto: `Erro ao cadastrar o ${produto.nome}: ${error.message}`,
-          },
-        ]);
-      });
-      
-    }
   };
 
   return (
     <Layout titulo="Cadastro de produtos" mensagens={messages}>
-
       {id && (
         <div className="columns">
           <Input label="Código:" columnClasses="is-half" value={id?.toString() || ""} disabled id="inputId" />
