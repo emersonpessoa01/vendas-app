@@ -135,7 +135,7 @@ export default function RootLayout({
 
 ```
 
-# FontAwesome com React
+## FontAwesome com React
 
 Este guia explica como instalar e utilizar a biblioteca FontAwesome em um projeto React.
 
@@ -192,9 +192,67 @@ Com **NPM**:
 npm install axios
 ```
 
-## Conclusão
+## 📦 Yup - Validação de Esquemas JavaScript
 
-Agora você pode utilizar o FontAwesome no seu projeto React de forma modular ou global, dependendo da sua necessidade. 🚀
+**Yup** é uma biblioteca JavaScript para **validação de objetos e schemas**. É amplamente utilizada com bibliotecas de formulários como React Hook Form e Formik, permitindo regras de validação simples, poderosas e reutilizáveis.
 
+---
 
+## 🚀 Instalação
 
+Use o gerenciador de pacotes de sua preferência:
+
+```bash
+npm install yup
+# ou
+yarn add yup
+```
+
+## 📚 Funcionalidades
+Validação de tipos: string, number, boolean, array, object, date.
+
+* Suporte a validação condicional.
+
+* Mensagens de erro personalizadas.
+
+* Validação assíncrona (ideal para checagens externas).
+
+* Integração com formulários (Formik, React Hook Form etc).
+
+## ✍️ Exemplo básico
+```bash
+import * as yup from 'yup';
+
+const schema = yup.object().shape({
+  nome: yup.string().required('O nome é obrigatório'),
+  idade: yup
+    .number()
+    .positive('A idade deve ser positiva')
+    .integer('A idade deve ser um número inteiro')
+    .required('A idade é obrigatória'),
+  email: yup
+    .string()
+    .email('E-mail inválido')
+    .required('O e-mail é obrigatório'),
+});
+
+// Validação
+schema
+  .validate({ nome: 'Emerson', idade: 25, email: 'emerson@email.com' })
+  .then((data) => console.log('Válido:', data))
+  .catch((err) => console.error('Erro:', err.errors));
+```
+
+## 📦 Integração com React Hook Form
+```bash
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+const { register, handleSubmit, formState: { errors } } = useForm({
+  resolver: yupResolver(schema),
+});
+```
+
+## 🔗 Documentação oficial
+Acesse a documentação completa em:
+👉 https://github.com/jquense/yup
